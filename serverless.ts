@@ -21,6 +21,7 @@ const serverlessConfiguration: Serverless = {
 		runtime: "nodejs12.x",
 		region: "eu-central-1",
 		stage: "dev",
+		// profile:"serverlessUser"  for use default not define,
 		apiGateway: {
 			minimumCompressionSize: 1024,
 		},
@@ -36,6 +37,18 @@ const serverlessConfiguration: Serverless = {
 					http: {
 						method: "get",
 						path: "/",
+					},
+				},
+			],
+		},
+		getCityInfo: {
+			handler: "lamdas/getCityInfo.handler",
+			events: [
+				{
+					http: {
+						path: "get-city/{city}",
+						method: "get",
+						cors: true,
 					},
 				},
 			],
