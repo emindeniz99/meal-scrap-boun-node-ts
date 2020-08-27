@@ -28,10 +28,17 @@ const serverlessConfiguration: Serverless = {
 		environment: {
 			AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1",
 		},
+		// iamRoleStatements: [
+		// 	{
+		// 		Effect: "Allow",
+		// 		Action: ["tranlate:*"],
+		// 		Resource: "*",
+		// 	},
+		// ],
 	},
 	functions: {
 		hello: {
-			handler: "handler.hello",
+			handler: "./handler.hello",
 			events: [
 				{
 					http: {
@@ -42,12 +49,36 @@ const serverlessConfiguration: Serverless = {
 			],
 		},
 		getCityInfo: {
-			handler: "lamdas/getCityInfo.handler",
+			handler: "./lamdas/getCityInfo.handler",
 			events: [
 				{
 					http: {
 						path: "get-city/{city}",
 						method: "get",
+						cors: true,
+					},
+				},
+			],
+		},
+		fetchMealList: {
+			handler: "./lamdas/fetchMealList.handler",
+			events: [
+				{
+					http: {
+						path: "fetchMealList",
+						method: "get",
+						cors: true,
+					},
+				},
+			],
+		},
+		translate: {
+			handler: "./lamdas/translate.handler",
+			events: [
+				{
+					http: {
+						path: "translate",
+						method: "post",
 						cors: true,
 					},
 				},

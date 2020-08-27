@@ -1,5 +1,6 @@
 import { APIGatewayProxyHandler } from "aws-lambda"
 import "source-map-support/register"
+import apiResponses from "./common/apiResponses"
 
 export const handler: APIGatewayProxyHandler = async (event, _context) => {
 	const city = event.pathParameters?.city
@@ -10,31 +11,7 @@ export const handler: APIGatewayProxyHandler = async (event, _context) => {
 		})
 	}
 
-	return apiResponses._200({data:cityData[city],input:event})
-}
-
-const apiResponses = {
-	_200: (body: { [key: string]: any }) => {
-		return {
-			statusCode: 200,
-			body: JSON.stringify(body, null, 2),
-		}
-	},
-	_400: (body: { [key: string]: any }) => {
-		return {
-			statusCode: 400,
-			body: JSON.stringify(body, null, 2),
-		}
-	},
-	//  i cant do it
-	// generic: (code: number): Function => {
-	// 	return (body: { [key: string]: any }) => {
-	// 		return {
-	// 			statusCode: code,
-	// 			body: JSON.stringify(body, null, 2),
-	// 		}
-	// 	}
-	// },
+	return apiResponses._200({ data: cityData[city], input: event })
 }
 
 interface CityData {
