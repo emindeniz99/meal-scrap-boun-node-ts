@@ -8,7 +8,7 @@ import * as rateLimit from "axios-rate-limit"
 import * as cheerio from "cheerio"
 
 const axios = rateLimit(pureAxios.create(), {
-	maxRequests: 50,
+	maxRequests: Number(process.env.MAXREQ),
 	perMilliseconds: 1000,
 })
 

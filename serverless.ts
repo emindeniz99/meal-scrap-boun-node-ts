@@ -15,7 +15,11 @@ const serverlessConfiguration: Serverless = {
 		},
 	},
 	// Add the serverless-webpack plugin
-	plugins: ["serverless-webpack", "serverless-offline"],
+	plugins: [
+		"serverless-dotenv-plugin",
+		"serverless-webpack",
+		"serverless-offline",
+	],
 	provider: {
 		name: "aws",
 		runtime: "nodejs12.x",
@@ -65,12 +69,17 @@ const serverlessConfiguration: Serverless = {
 			events: [
 				{
 					http: {
-						path: "fetchMealList",
+						path: "fetchMealList/{proxy+}",
 						method: "get",
 						cors: true,
 					},
 				},
 			],
+			environment: {
+				MONGO_CONNECTION_STRING: "${env:ENVMONGO_CONNECTION_STRING}",
+			},
+			memorySize: 256,
+			timeout:60
 		},
 		translate: {
 			handler: "./lamdas/translate.handler",
