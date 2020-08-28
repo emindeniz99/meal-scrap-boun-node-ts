@@ -40,6 +40,13 @@ interface mealsOfMonth {
 }
 
 const getCalorieAndIn = async (href) => {
+	return {
+		ad: "ERROR",
+		kalori: 10,
+		int: "2",
+	}
+
+
 	try {
 		const htmlData: string = await axios
 			.get("https://yemekhane.boun.edu.tr" + href)
@@ -91,7 +98,7 @@ const getCalorieAndIn = async (href) => {
 	}
 }
 
-export const handler: APIGatewayProxyHandler = async (event, _context) => {
+export const fetchMonth = async () => {
 	const htmlData: string = await axios
 		.get("https://yemekhane.boun.edu.tr/aylik-menu/2020-08")
 		.then((data) => {
@@ -177,4 +184,8 @@ export const handler: APIGatewayProxyHandler = async (event, _context) => {
 			})
 	)
 	return apiResponses._200(mealsOfMonth)
+}
+
+export const handler: APIGatewayProxyHandler = async (event, _context) => {
+	return fetchMonth()
 }

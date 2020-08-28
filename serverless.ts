@@ -73,13 +73,19 @@ const serverlessConfiguration: Serverless = {
 						method: "get",
 						cors: true,
 					},
+					
 				},
+				// {
+				// 	schedule:"cron(0/2 * ? * MON-FRI *)"
+				// }
+				
 			],
 			environment: {
 				MONGO_CONNECTION_STRING: "${env:ENVMONGO_CONNECTION_STRING}",
 			},
 			memorySize: 256,
-			timeout:60
+			timeout: 60,
+			
 		},
 		translate: {
 			handler: "./lamdas/translate.handler",
@@ -92,6 +98,23 @@ const serverlessConfiguration: Serverless = {
 					},
 				},
 			],
+		},
+		info: {
+			handler: "./lamdas/info.handler",
+			events: [
+				{
+					http: {
+						path: "info/{proxy+}",
+						method: "get",
+						cors: true,
+					},
+				},
+			],
+			environment: {
+				MONGO_CONNECTION_STRING: "${env:ENVMONGO_CONNECTION_STRING}",
+			},
+			memorySize: 256,
+			timeout: 60,
 		},
 	},
 }

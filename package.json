@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "@types/mongoose": "^5.7.36",
     "axios": "^0.20.0",
     "axios-rate-limit": "^1.2.1",
     "cheerio": "^1.0.0-rc.3",
