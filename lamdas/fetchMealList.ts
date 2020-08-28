@@ -3,8 +3,7 @@ import "source-map-support/register"
 import { apiResponses } from "./common/apiResponses"
 
 import pureAxios from "axios"
-import * as rateLimit from "axios-rate-limit"
-
+import rateLimit from "axios-rate-limit"
 import * as cheerio from "cheerio"
 
 const axios = rateLimit(pureAxios.create(), {
